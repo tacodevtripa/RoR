@@ -9,5 +9,12 @@ class User < ApplicationRecord
         [ recent_three ]
     end
 
+    def increment_posts_counter
+        self.increment!(:posts_counter)
+    end
+
+    def get_posts_counter
+        self.posts.count
+    end
     private
 end
