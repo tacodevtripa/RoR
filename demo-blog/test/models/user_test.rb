@@ -42,6 +42,7 @@ class UserTest < ActiveSupport::TestCase
       Post.create!(
         author: @user,
         title: "Post #{i + 1}",
+        text: "Text #{i + 1}",
         comments_counter: 0,
         likes_counter: 0,
         created_at: Time.now - i.hours
@@ -64,8 +65,8 @@ class UserTest < ActiveSupport::TestCase
   # Test get_posts_counter method
   test "get_posts_counter should return the count of posts" do
     @user.save
-    Post.create!(author: @user, title: "Test Post 1", comments_counter: 0, likes_counter: 0)
-    Post.create!(author: @user, title: "Test Post 2", comments_counter: 0, likes_counter: 0)
+    Post.create!(author: @user, title: "Test Post 1", text: "demo text", comments_counter: 0, likes_counter: 0)
+    Post.create!(author: @user, title: "Test Post 2", text: "demo text", comments_counter: 0, likes_counter: 0)
     assert_equal 2, @user.get_posts_counter
   end
 end
