@@ -61,3 +61,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development, :test do
+  # RSpec version for Rails 8.x [https://github.com/rspec/rspec-rails/tree/7-1-maintenance]
+  gem "rspec-rails", "~> 7.0.0"
+end
