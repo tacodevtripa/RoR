@@ -1,8 +1,4 @@
 one:
-  id: 999999
   name: "Fixture User"
   photo: "Test Photo"
   bio: "Test Bio"
-  posts_counter: 0
-  created_at: "2025-01-25T22:09:22.856Z"
-  updated_at: "2025-01-25T22:09:22.856Z"

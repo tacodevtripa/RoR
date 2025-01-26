@@ -13,6 +13,10 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'rails_helper'
+require 'simplecov'
+require 'shoulda-matchers'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -95,4 +99,18 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+SimpleCov.start do
+  add_filter '/test/'      # Exclude the test directory
+  add_filter '/config/'    # Exclude config files
+  add_filter '/vendor/'    # Exclude vendor files
+  add_filter '/spec/'      # Exclude spec folder
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

@@ -1,0 +1,34 @@
+one:
+  title: "First Post"
+  text: "This is the first post."
+  author: :one # Correct field for the foreign key
+  comments_counter: 3
+  likes_counter: 5
+
+two:
+  title: "Second Post"
+  text: "This is the second post."
+  author: :one # Correct field for the foreign key
+  comments_counter: 2
+  likes_counter: 3
+
+three:
+  title: "Third Post"
+  text: "This is the third post."
+  author: :one # Correct field for the foreign key
+  comments_counter: 1
+  likes_counter: 2
+
+four:
+  title: "Fourth Post"
+  text: "This is the fourth post."
+  author: :one # Correct field for the foreign key
+  comments_counter: 4
+  likes_counter: 7
+
+five:
+  title: "Fifth Post"
+  text: "This is the fifth post."
+  author: :one # Correct field for the foreign key
+  comments_counter: 5
+  likes_counter: 8

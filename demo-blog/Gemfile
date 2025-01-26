@@ -66,3 +66,8 @@ group :development, :test do
   # RSpec version for Rails 8.x [https://github.com/rspec/rspec-rails/tree/7-1-maintenance]
   gem "rspec-rails", "~> 7.0.0"
 end
+
+group :test do
+  gem "simplecov", require: false
+  gem "shoulda-matchers", "~> 5.0"
+end
