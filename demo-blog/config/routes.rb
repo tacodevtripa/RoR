@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   get "/user/index", to: "user#index"
+  get "/user/show/:id", to: "user#show"
+  post "/user/new", to: "user#create"
+  put "/user/update/:id", to: "user#update"
+  delete "/user/delete/:id", to: "user#delete"
 
   # Defines the root path route ("/")
   # root "posts#index"
