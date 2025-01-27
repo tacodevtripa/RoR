@@ -2,28 +2,27 @@
   <h1 class="text-center mb-4">All Users</h1>
 
   <table class="table table-striped table-bordered">
-    <thead class="table-dark">
-      <tr>
-        <th>Name</th>
-        <th>Bio</th>
-        <th>Photo</th>
-        <th>Posts Counter</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= truncate(user.bio, length: 50) %></td>
-          <td class="text-center">
+        <tr class="row justify-content-between align-items-center">
+          <!-- Photo column -->
+          <td class="col-md-2 text-center">
             <% if user.photo.present? %>
-              <%= image_tag('', alt: "#{user.name}'s photo", class: "img-thumbnail", width: 50, height: 50) %>
+              <%= image_tag('profile-pic.png', alt: "#{user.name}'s photo", class: "img-thumbnail", width: 150, height: 150) %>
             <% else %>
               <span class="text-muted">No photo</span>
             <% end %>
           </td>
-          <td class="text-center"><%= user.posts_counter %></td>
+
+          <!-- User name and posts counter column -->
+          <td class="col-md-10 align-items-center">
+              <div class="col-auto fs-1 mr-auto">
+                <strong class="font-weight-bold"> <%= user.name %> </strong>
+              </div>
+              <div class="col-auto text-end">
+                <small class="w-50">Number of Posts: <%= user.posts_counter %></small>
+              </div>
+          </td>
         </tr>
       <% end %>
     </tbody>
