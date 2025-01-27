@@ -16,28 +16,13 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-        <!-- Add the Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7DNP/5lQN2h5c5iQl/24ZxkrBrwXTsKw0/"
-      crossorigin="anonymous"
-    >
-
+    
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= yield %>
-
-        <!-- Add the Bootstrap JavaScript Bundle -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76A64AR1Ewtz2b0GxkaBJP68f3w8F1pdsFq3f6seKRpvh+0URP+1Kk6IRoeg+qm"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
