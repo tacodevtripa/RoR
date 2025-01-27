@@ -1,0 +1,29 @@
+<h1>All Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bio</th>
+      <th>Photo</th>
+      <th>Posts Counter</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.bio %></td>
+        <td>
+          <% if user.photo.present? %>
+            <%= image_tag('', alt: "#{user.name}'s photo", width: 50, height: 50) %>
+          <% else %>
+            <em>No photo</em>
+          <% end %>
+        </td>
+        <td><%= user.posts_counter %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

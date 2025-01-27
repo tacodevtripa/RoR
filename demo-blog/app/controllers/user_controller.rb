@@ -2,7 +2,10 @@ class UserController < ApplicationController
   protect_from_forgery with: :null_session
   def index
     @users = User.all
-    render json: @users
+    respond_to do |format|
+      format.html # Renders the HTML view by default
+      format.json { render json: @users }
+    end
   end
 
   def show
