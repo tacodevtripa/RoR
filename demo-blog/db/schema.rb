@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_26_220753) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_28_201347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_220753) do
   end
 
   add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users", column: "author_id", on_delete: :cascade

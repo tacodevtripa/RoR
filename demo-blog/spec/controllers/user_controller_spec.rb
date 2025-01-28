@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe UserController, type: :controller do
-  fixtures :users
+  fixtures :users, :posts
 
   describe "GET #index" do
     it "returns a successful response and all users" do
-      get :index
+      get :index, format: :json
       expect(response).to be_successful
       expect(JSON.parse(response.body).size).to eq(User.count)
     end
   end
 
-  describe "GET #show" do
+  describe "GET #show_user" do
     context "when the user exists" do
       it "returns the user" do
         user = users(:one)
-        get :show, params: { id: user.id }
+        get :show_user, params: { id: user.id }, format: :json
         expect(response).to be_successful
         expect(JSON.parse(response.body)["name"]).to eq(user.name)
     end
@@ -23,11 +23,50 @@ RSpec.describe UserController, type: :controller do
 
     context "when the user does not exist" do
       it "returns a not found error" do
-        get :show, params: { id: -1 }
+        get :show_user, params: { id: -1 }, format: :json
         expect(response).to have_http_status(:not_found)
         expect(JSON.parse(response.body)["error"]).to eq("User not found")
       end
     end
+  end
+
+  describe "GET #show_user_posts" do
+  context "when the user exists" do
+    it "returns the user" do
+      user = users(:one)
+      get :show_user_posts, params: { id: user.id }, format: :json
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)["name"]).to eq(user.name)
+  end
+end
+
+  context "when the user does not exist" do
+    it "returns a not found error" do
+      get :show_user_posts, params: { id: -1 }, format: :json
+      expect(response).to have_http_status(:not_found)
+      expect(JSON.parse(response.body)["error"]).to eq("User not found")
+    end
+  end
+  end
+
+  describe "GET #show_user_specific_post" do
+  context "when the user exists" do
+    it "returns the user" do
+      user = users(:one)
+      post = posts(:one)
+      get :show_user_specific_post, params: { id: user.id, post_id: post.id }, format: :json
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)["author_id"]).to eq(user.id)
+  end
+  end
+
+  context "when the user does not exist" do
+    it "returns a not found error" do
+      get :show_user_specific_post, params: { id: -1, post_id: -1 }, format: :json
+      expect(response).to have_http_status(:not_found)
+      expect(JSON.parse(response.body)["error"]).to eq("User not found")
+    end
+  end
   end
 
   describe "POST #create" do
