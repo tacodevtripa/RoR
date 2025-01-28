@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+  <div class="container mx-auto">
+    <div class="row mt-1 justify-content-center">
+      <div class="col-md-6 border border-secondary">
+        <h6 class="text-start">Post Number: <%= @post.id %> by <i><%= @user.name %></i></h6>
+        <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
+        <p class="text-center"> <%= @post.text %> </p>
+      </div>
+    </div>
+    <div class="row px-1 justify-content-center">
+      <div class="col-md-6 border border-secondary">
+        <% @post.comments.each do |comment| %>
+          <p><strong><%= comment.user.name %>:</strong> <span><%= comment.text %></span></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

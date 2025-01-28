@@ -32,6 +32,19 @@ class UserController < ApplicationController
     end
   end
 
+  def show_user_specific_post
+    begin
+      @user = User.find(params[:id])
+      @post = Post.find(params[:post_id])
+      respond_to do |format|
+        format.html # Renders the HTML view by default
+        format.json { render json: @post }
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+
   def create
     user_params = JSON.parse(request.body.read)
     @user = User.new(user_params)
