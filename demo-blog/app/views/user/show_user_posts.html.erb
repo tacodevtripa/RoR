@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="row my-1 justify-content-center align-items-center">
+    <div class="col-md-2">
+            <% if @user.photo.present? %>
+              <%= image_tag('profile-pic.png', alt: "#{@user.name}'s photo", class: "img-thumbnail border border-secondary", width: 150, height: 150) %>
+            <% else %>
+              <span class="text-muted">No photo</span>
+            <% end %>
+    </div>
+    <div class="col-md-4 border border-secondary">
+              <div class="col-auto fs-1 mr-auto">
+                <strong class="font-weight-bold"> <%= @user.name %> </strong>
+              </div>
+              <div class="col-auto text-end">
+                <small class="w-50">Number of Posts: <%= @user.posts_counter %></small>
+              </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto">
+    <% post_count = 0 %>
+    <% @user.recent_posts.each do |post| %>
+      <div class="row mt-1 justify-content-center">
+        <div class="col-md-6 border border-secondary">
+          <h6 class="text-start">Post Number: <%= post_count + 1 %></h6>
+          <% post_count += 1 %>
+          <p class="text-center"> <%= post.text %> </p>
+          <p class="text-end"> <span>Comments: <%= post.comments_counter %></span> <span>Likes: <%= post.likes_counter %></span> </p>
+        </div>
+      </div>
+      <div class="row px-1 justify-content-center">
+        <div class="col-md-6 border border-secondary">
+          <p>placeholder</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

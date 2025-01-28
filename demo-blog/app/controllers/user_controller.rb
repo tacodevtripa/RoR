@@ -8,12 +8,24 @@ class UserController < ApplicationController
     end
   end
 
-  def show
+  def show_user
     begin
       @user = User.find(params[:id])
       respond_to do |format|
         format.html # Renders the HTML view by default
-        format.json { render json: @users }
+        format.json { render json: @user }
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+
+  def show_user_posts
+    begin
+      @user = User.find(params[:id])
+      respond_to do |format|
+        format.html # Renders the HTML view by default
+        format.json { render json: @user }
       end
     rescue ActiveRecord::RecordNotFound
       render json: { error: "User not found" }, status: :not_found
