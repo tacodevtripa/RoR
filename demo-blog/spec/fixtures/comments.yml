@@ -1,0 +1,29 @@
+one:
+  user: :one
+  post: :one
+  text: "text comment 1"
+
+two:
+  user: :one
+  post: :one
+  text: "text comment 2"
+
+three:
+  user: :one
+  post: :one
+  text: "text comment 3"
+
+four:
+  user: :one
+  post: :one
+  text: "text comment 4"
+
+five:
+  user: :one
+  post: :one
+  text: "text comment 5"
+
+six:
+  user: :one
+  post: :one
+  text: "text comment 6"
