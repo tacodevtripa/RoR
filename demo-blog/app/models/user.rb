@@ -12,7 +12,7 @@ class User < ApplicationRecord
     def recent_posts
         all_posts = self.posts.order(created_at: :desc)
         recent_three = all_posts.take(3)
-        [ recent_three ]
+        recent_three
     end
 
     def increment_posts_counter
