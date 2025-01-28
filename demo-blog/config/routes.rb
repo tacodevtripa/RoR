@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  get "/user/index", to: "user#index"
-  get "/user/show/:id", to: "user#show"
+  get "/", to: "user#index"
+  get "/user/:id", to: "user#show"
   post "/user/new", to: "user#create"
   put "/user/update/:id", to: "user#update"
   delete "/user/delete/:id", to: "user#delete"
