@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   put "/user/update/:id", to: "user#update"
   delete "/user/delete/:id", to: "user#delete"
 
+  get "/sign_in", to: "sessions#sign_in"
+  delete "/log_out", to: "sessions#log_out"
+
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "user#index"
 end
