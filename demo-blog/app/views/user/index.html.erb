@@ -1,16 +1,10 @@
-<style>
-  .clickable-row {
-    cursor: pointer; /* Changes cursor to pointer */
-  }
-</style>
-
 <div class="container mt-4">
   <h1 class="text-center mb-4">All Users</h1>
 
   <table class="table table-striped table-bordered">
     <tbody>
       <% @users.each do |user| %>
-        <tr class="row justify-content-between align-items-center clickable-row" data-url="<%= show_user_path(user) %>">
+        <tr class="row justify-content-between align-items-center" data-url="<%= show_user_path(user) %>">
           <!-- Photo column -->
           <td class="col-md-2 text-center">
             <% if user.photo.present? %>
@@ -28,19 +22,10 @@
             <div class="col-auto text-end">
               <small class="w-50">Number of Posts: <%= user.posts_counter %></small>
             </div>
+            <%= link_to 'See user profile', show_user_path(user), class: 'btn btn-primary' %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".clickable-row").forEach(row => {
-      row.addEventListener("click", function() {
-        window.location = this.dataset.url;
-      });
-    });
-  });
-</script>
