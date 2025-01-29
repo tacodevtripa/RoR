@@ -17,12 +17,11 @@
           <!-- User name and posts counter column -->
           <td class="col-md-10 align-items-center">
             <div class="col-auto fs-1 mr-auto">
-              <strong class="font-weight-bold"> <%= user.name %> </strong>
+              <%= link_to user.name, show_user_path(user), class: 'btn btn-outline-secondary' %>
             </div>
             <div class="col-auto text-end">
               <small class="w-50">Number of Posts: <%= user.posts_counter %></small>
             </div>
-            <%= link_to 'See user profile', show_user_path(user), class: 'btn btn-primary' %>
           </td>
         </tr>
       <% end %>

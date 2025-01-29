@@ -36,6 +36,9 @@
           <h6 class="text-start">Post Number: <%= post_count + 1 %></h6>
           <% post_count += 1 %>
           <p class="text-center"> <%= post.text %> </p>
+          <div class="d-flex justify-content-end">
+            <%= link_to 'view post', show_user_specific_post_path(@user.id, post.id), class: 'btn btn-outline-secondary mb-1' %>
+          </div>
         </div>
       </div>
     <% end %>
