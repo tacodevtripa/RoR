@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get "/sign_in", to: "sessions#sign_in"
   delete "/log_out", to: "sessions#log_out"
 
+  get "/post/index", to: "posts#index"
+  post "/post/create", to: "posts#create"
+  put "/post/update/:id", to: "posts#update"
+  delete "/post/delete/:id", to: "posts#delete"
+
   # Defines the root path route ("/")
-  root "user#index"
+  root "post#index"
 end

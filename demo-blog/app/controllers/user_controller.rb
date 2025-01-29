@@ -58,7 +58,6 @@ class UserController < ApplicationController
   def update
     begin
       user_params = JSON.parse(request.body.read)
-      puts params[:id]
       @user = User.update(params[:id], user_params)
       render json: @user
     rescue ActiveRecord::RecordNotFound

@@ -4,7 +4,7 @@
   <table class="table table-striped table-bordered">
     <tbody>
       <% @users.each do |user| %>
-        <tr class="row justify-content-between align-items-center" data-url="<%= show_user_path(user) %>">
+        <tr class="row justify-content-between align-items-center">
           <!-- Photo column -->
           <td class="col-md-2 text-center">
             <% if user.photo.present? %>
