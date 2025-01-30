@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   put "/post/update/:id", to: "posts#update"
   delete "/post/delete/:id", to: "posts#delete"
 
+  post "/comment/create", to: "comments#create", as: "new_comment"
+
   # Defines the root path route ("/")
   root "post#index"
 end

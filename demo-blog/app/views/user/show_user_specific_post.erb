@@ -7,12 +7,37 @@
         <p class="text-center"> <%= @post.text %> </p>
       </div>
     </div>
-    <div class="row px-1 justify-content-center">
-      <div class="col-md-6 border border-secondary">
-        <% @post.comments.each do |comment| %>
-          <p><strong><%= comment.user.name %>:</strong> <span><%= comment.text %></span></p>
-        <% end %>
+  <div class="row px-5 mb-5 justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-1 border-secondary">
+        <div class="card-body">
+          <!-- Comments List -->
+          <div class="mb-5">
+            <% @post.comments.each do |comment| %>
+              <div class="bg-light p-3 rounded mb-2">
+                <p><strong><%= comment.user.name %>:</strong> <%= comment.text %></p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Add Comment Form -->
+          <div class="ml-auto">
+            <% if @current_user %>
+              <%= form_for(:comment, url: new_comment_path, method: :post) do |form| %>
+                <%= form.hidden_field :post_id, value: @post.id %>
+                <div class="mb-3">
+                  <%= form.text_area :text, class: "form-control", rows: 5, placeholder: "Write your comment..." %>
+                </div>
+                <button type="submit"
+                        class="btn btn-primary rounded">
+                  Post Comment
+                </button>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
