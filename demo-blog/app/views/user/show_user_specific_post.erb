@@ -20,7 +20,7 @@
         <div class="card-body">
           <!-- Comments List -->
           <div class="mb-5">
-            <% @post.comments.each do |comment| %>
+            <% @post.comments.includes(:user).each do |comment| %>
               <div class="bg-light p-3 rounded mb-2">
                 <p><strong><%= comment.user.name %>:</strong> <%= comment.text %></p>
               </div>

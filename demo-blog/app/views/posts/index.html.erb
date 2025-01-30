@@ -3,7 +3,7 @@
 
   <table class="table table-striped table-bordered">
     <tbody>
-      <% @posts.each do |post| %>
+      <% @posts.includes(:author).each do |post| %>
         <tr class="row justify-content-center align-items-center">
           <!-- User name and posts counter column -->
           <td class="col-md-10 align-items-center">
@@ -13,7 +13,7 @@
                 <p class="text-center"> <%= post.text %> </p>
                 <p class="text-end"> <span>Comments: <%= post.comments_counter %></span> <span>Likes: <%= post.likes_counter %></span> </p>
                 <div class="col-auto fs-1 mr-auto">
-                  <%= link_to 'see post', show_user_specific_post_path(User.find_by(id: post.author), post.id), class: 'btn btn-outline-secondary' %>
+                  <%= link_to 'see post', show_user_specific_post_path(post.author, post.id), class: 'btn btn-outline-secondary' %>
                 </div>
               </div>
             </div>
