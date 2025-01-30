@@ -35,8 +35,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author = @current_user # Assigning current user
-
     if @post.save
+      @current_user.increment_posts_counter
       redirect_to show_user_specific_post_path(@current_user.id, @post.id), notice: "Post was successfully created."
     else
       render :new, status: :unprocessable_entity

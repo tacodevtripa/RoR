@@ -3,12 +3,13 @@
     <div class="row mt-1 justify-content-center">
       <div class="col-md-6 border border-secondary">
         <h6 class="text-start">Post Number: <%= @post.id %> by <i><%= @user.name %></i></h6>
-        <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
+        <h6 class="text-center"><%= @post.title %></h6>
         <p class="text-center"> <%= @post.text %> </p>
+        <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
         <% if @current_user %>
           <%= form_for(:like, url: new_like_path, method: :post) do |form| %>
             <%= form.hidden_field :post_id, value: @post.id %>
-            <button type="submit" class="btn btn-primary rounded">Like</button>
+            <button type="submit" class="btn btn-primary rounded mb-1">Like</button>
           <% end %>
         <% end %>
       </div>
