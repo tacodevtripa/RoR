@@ -5,6 +5,12 @@
         <h6 class="text-start">Post Number: <%= @post.id %> by <i><%= @user.name %></i></h6>
         <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
         <p class="text-center"> <%= @post.text %> </p>
+        <% if @current_user %>
+          <%= form_for(:like, url: new_like_path, method: :post) do |form| %>
+            <%= form.hidden_field :post_id, value: @post.id %>
+            <button type="submit" class="btn btn-primary rounded">Like</button>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <div class="row px-5 mb-5 justify-content-center">
@@ -28,10 +34,7 @@
                 <div class="mb-3">
                   <%= form.text_area :text, class: "form-control", rows: 5, placeholder: "Write your comment..." %>
                 </div>
-                <button type="submit"
-                        class="btn btn-primary rounded">
-                  Post Comment
-                </button>
+                <button type="submit" class="btn btn-primary rounded">Post Comment</button>
               <% end %>
             <% end %>
           </div>

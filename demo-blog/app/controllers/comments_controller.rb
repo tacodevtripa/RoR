@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to show_user_specific_post_path(@post.author, @post), notice: "Comment was successfully created."
     else
-      redirect_to show_user_specific_post_path(@post.author, @post), notice: "Error creating ccomment."
+      redirect_to show_user_specific_post_path(@post.author, @post), notice: "Error creating comment."
     end
   end
 
