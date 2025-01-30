@@ -8,20 +8,15 @@ class PostsController < ApplicationController
     end
   end
 
-  def create
-    user_params = JSON.parse(request.body.read)
-    @post = Post.new(user_params)
-    if @user.save
-      render json: @post, status: :created, post: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
+
+  def new
+    @post = Post.new
   end
 
   def update
     begin
-      user_params = JSON.parse(request.body.read)
-      @post = Post.update(params[:id], user_params)
+      post_params = JSON.parse(request.body.read)
+      @post = Post.update(params[:id], post_params)
       render json: @post
     rescue ActiveRecord::RecordNotFound
       render json: { error: "Post not found" }, status: :not_found
@@ -35,5 +30,22 @@ class PostsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       render json: { error: "Post not found" }, status: :not_found
     end
+  end
+
+  def create
+    @post = Post.new(post_params)
+    @post.author = @current_user # Assigning current user
+
+    if @post.save
+      redirect_to show_user_specific_post_path(@current_user.id, @post.id), notice: "Post was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :text) # Allow only specific fields
   end
 end

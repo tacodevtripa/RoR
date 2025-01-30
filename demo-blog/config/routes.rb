@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   delete "/log_out", to: "sessions#log_out"
 
   get "/post/index", to: "posts#index"
+  get "/post/create", to: "posts#new", as: "new_post"
   post "/post/create", to: "posts#create"
   put "/post/update/:id", to: "posts#update"
   delete "/post/delete/:id", to: "posts#delete"
