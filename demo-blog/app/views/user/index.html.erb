@@ -8,7 +8,7 @@
           <!-- Photo column -->
           <td class="col-md-2 text-center">
             <% if user.photo.present? %>
-              <%= image_tag('profile-pic.png', alt: "#{user.name}'s photo", class: "img-thumbnail", width: 150, height: 150) %>
+              <%= image_tag('profile-pic.png', alt: "#{user.name} profile picture", class: "img-thumbnail", width: 150, height: 150) %>
             <% else %>
               <span class="text-muted">No photo</span>
             <% end %>

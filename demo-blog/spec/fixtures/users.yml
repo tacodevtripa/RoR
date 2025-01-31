@@ -2,3 +2,7 @@ one:
   name: "Fixture User"
   photo: "Test Photo"
   bio: "Test Bio"
+
+two:
+  name: "Fixture User 2"
+  bio: "Test Bio 2"
