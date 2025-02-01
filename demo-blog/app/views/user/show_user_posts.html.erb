@@ -1,40 +1,28 @@
-<div class="row justify-content-center">
-  <div class="row my-1 justify-content-center align-items-center">
-    <div class="col-md-2">
-            <% if @user.photo.present? %>
-              <%= image_tag('profile-pic.png', alt: "#{@user.name}'s photo", class: "img-thumbnail border border-secondary", width: 150, height: 150) %>
-            <% else %>
-              <span class="text-muted">No photo</span>
-            <% end %>
+<div class="container mx-auto">
+  <% @posts.each do |post| %>
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-6 border border-secondary">
+        <h6 class="text-start">Post Number: <%= post.id %></h6>
+        <p class="text-center"> <%= post.text %> </p>
+        <div class="d-flex justify-content-end align-items-center">
+          <small class="text-end mx-1">Comments: <%= post.comments_counter %> Likes: <%= post.likes_counter %></small>
+          <%= link_to 'view post', show_user_specific_post_path(@user.id, post.id), class: 'btn btn-outline-secondary mb-1' %>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4 border border-secondary">
-              <div class="col-auto fs-1 mr-auto">
-                <strong class="font-weight-bold"> <%= @user.name %> </strong>
-              </div>
-              <div class="col-auto text-end">
-                <small class="w-50">Number of Posts: <%= @user.posts_counter %></small>
-              </div>
-    </div>
-  </div>
 
-  <div class="container mx-auto">
-    <% post_count = 0 %>
-    <% @user.recent_posts.each do |post| %>
-      <div class="row mt-1 justify-content-center">
-        <div class="col-md-6 border border-secondary">
-          <h6 class="text-start">Post Number: <%= post_count + 1 %></h6>
-          <% post_count += 1 %>
-          <p class="text-center"> <%= post.text %> </p>
-          <p class="text-end"> <span>Comments: <%= post.comments_counter %></span> <span>Likes: <%= post.likes_counter %></span> </p>
-        </div>
+    <!-- Comments Section -->
+    <div class="row px-1 justify-content-center">
+      <div class="col-md-6 border border-secondary">
+        <% post.comments.includes(:user).each do |comment| %>
+          <p><strong><%= comment.user.name %>:</strong> <span><%= comment.text %></span></p>
+        <% end %>
       </div>
-      <div class="row px-1 justify-content-center">
-        <div class="col-md-6 border border-secondary">
-          <% post.comments.each do |comment| %>
-            <p><strong><%= comment.user.name %>:</strong> <span><%= comment.text %></span></p>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    </div>
+  <% end %>
+
+  <!-- Bootstrap Pagination -->
+  <div class="d-flex justify-content-center mt-3">
+    <%= paginate @posts %>
   </div>
 </div>

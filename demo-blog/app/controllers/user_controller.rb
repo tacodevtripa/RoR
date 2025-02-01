@@ -23,6 +23,7 @@ class UserController < ApplicationController
   def show_user_posts
     begin
       @user = User.find(params[:id])
+      @posts = @user.posts.order(:created_at).page(params[:page]).per(3)
       respond_to do |format|
         format.html # Renders the HTML view by default
         format.json { render json: @user }
