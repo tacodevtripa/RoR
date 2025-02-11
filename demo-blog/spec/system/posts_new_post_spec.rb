@@ -35,4 +35,10 @@ RSpec.describe "Create Post", type: :system do
 
     expect(page).to have_content("Error creating post")
   end
+
+  it "logs out when clicking the log out button" do
+    click_button "Log Out"
+
+    expect(page).to have_content("Logged out successfully!")
+  end
 end
