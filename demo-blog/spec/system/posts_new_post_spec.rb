@@ -20,20 +20,19 @@ RSpec.describe "Create Post", type: :system do
     expect(page).to have_button("Create Post")
   end
 
-  # it "creates a post when the form is submitted with valid data" do
-  #   fill_in "Post Title", with: "My First Post"
-  #   fill_in "Your Post Text", with: "This is the content of my first post."
+  it "creates a post when the form is submitted with valid data" do
+    fill_in "Post Title", with: "Test Post"
+    fill_in "Your Post Text", with: "This is the content of my first test post."
 
-  #   click_button "Create Post"
+    click_button "Create Post"
 
-  #   expect(page).to have_content("Post was successfully created") # Adjust based on your flash message
-  #   expect(page).to have_content("My First Post")
-  # end
+    expect(page).to have_content("Post was successfully created") # Adjust based on your flash message
+    expect(page).to have_content("Test Post")
+  end
 
-  # it "shows an error when submitting an empty form" do
-  #   click_button "Create Post"
+  it "shows an error when submitting an empty form" do
+    click_button "Create Post"
 
-  #   expect(page).to have_content("Title can't be blank") # Adjust based on your validation messages
-  #   expect(page).to have_content("Text can't be blank")
-  # end
+    expect(page).to have_content("Error creating post")
+  end
 end

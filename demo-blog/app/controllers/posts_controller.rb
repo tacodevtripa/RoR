@@ -39,7 +39,7 @@ class PostsController < ApplicationController
       @current_user.increment_posts_counter
       redirect_to show_user_specific_post_path(@current_user.id, @post.id), notice: "Post was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_post_path, notice: "Error creating post"
     end
   end
 
