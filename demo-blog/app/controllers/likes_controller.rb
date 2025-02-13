@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   def create
     @post = Post.find_by(id: like_params["post_id"])
-    @like = Like.new(user: @current_user, post: @post)
+    @like = Like.new(user: current_user, post: @post)
     if @like.save
       @post.increment_likes_counter
       redirect_to show_user_specific_post_path(@post.author, @post), notice: "You liked this post"

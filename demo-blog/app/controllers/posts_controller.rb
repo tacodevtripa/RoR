@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   protect_from_forgery with: :null_session
+  before_action :authenticate_user!
+
   def index
     @posts = Post.all
     respond_to do |format|
@@ -34,10 +36,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.author = @current_user # Assigning current user
+    @post.author = current_user # Assigning current user
     if @post.save
-      @current_user.increment_posts_counter
-      redirect_to show_user_specific_post_path(@current_user.id, @post.id), notice: "Post was successfully created."
+      current_user.increment_posts_counter
+      redirect_to show_user_specific_post_path(current_user.id, @post.id), notice: "Post was successfully created."
     else
       redirect_to new_post_path, notice: "Error creating post"
     end

@@ -6,7 +6,7 @@
         <h6 class="text-center"><%= @post.title %></h6>
         <p class="text-center"> <%= @post.text %> </p>
         <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
-        <% if @current_user %>
+        <% if user_signed_in? %>
           <%= form_for(:like, url: new_like_path, method: :post) do |form| %>
             <%= form.hidden_field :post_id, value: @post.id %>
             <button type="submit" class="btn btn-primary rounded mb-1">Like</button>
@@ -29,7 +29,7 @@
 
           <!-- Add Comment Form -->
           <div class="ml-auto">
-            <% if @current_user %>
+            <% if user_signed_in? %>
               <%= form_for(:comment, url: new_comment_path, method: :post) do |form| %>
                 <%= form.hidden_field :post_id, value: @post.id %>
                 <div class="mb-3">
