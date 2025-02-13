@@ -9,11 +9,14 @@
           <td class="col-md-10 align-items-center">
             <div class="row mt-1 justify-content-center">
               <div class="col-md-6 border border-secondary">
-                <h6> <%= post.title %>
+                <h6> <%= post.title %> <i>by <%= post.author.name %></i> </h6>
                 <p class="text-center"> <%= post.text %> </p>
                 <p class="text-end"> <span>Comments: <%= post.comments_counter %></span> <span>Likes: <%= post.likes_counter %></span> </p>
                 <div class="col-auto fs-1 mr-auto">
                   <%= link_to 'see post', show_user_specific_post_path(post.author, post.id), class: 'btn btn-outline-secondary' %>
+                  <% if can?(:delete, post) %>
+                    <%= button_to "Delete Post", delete_post_path(post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                  <% end %>
                 </div>
               </div>
             </div>

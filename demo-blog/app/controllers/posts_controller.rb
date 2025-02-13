@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :authenticate_user!
+  load_and_authorize_resource # Ensures CanCanCan enforces permissions
 
   def index
     @posts = Post.all
@@ -27,10 +28,10 @@ class PostsController < ApplicationController
 
   def delete
     begin
-      Post.find(params[:id]).delete
-      render json: { "message": "delete success" }
+      @post = Post.find(params[:id]).delete
+      redirect_to root_path, notice: "Post was successfully deleted."
     rescue ActiveRecord::RecordNotFound
-      render json: { error: "Post not found" }, status: :not_found
+      redirect_to root_path, notice: "Error deleting post."
     end
   end
 

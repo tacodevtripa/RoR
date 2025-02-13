@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get "/post/create", to: "posts#new", as: "new_post"
   post "/post/create", to: "posts#create"
   put "/post/update/:id", to: "posts#update"
-  delete "/post/delete/:id", to: "posts#delete"
+  delete "/post/delete/:id", to: "posts#delete", as: "delete_post"
 
   post "/comment/create", to: "comments#create", as: "new_comment"
 
