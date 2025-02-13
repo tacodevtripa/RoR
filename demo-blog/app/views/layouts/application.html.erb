@@ -40,9 +40,9 @@
               <a class="nav-link active" aria-current="page" href="/post/index">Post Index</a>
             </li>
           </ul>
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-center">
             <% if user_signed_in? %>
-              <li class="nav-item">
+              <li class="nav-item align-i">
                 <span class="navbar-text">Welcome, <%= current_user.name %>!</span>
               </li>
               <li class="nav-item">
@@ -66,6 +66,9 @@
     </nav>
     <% if flash[:notice] %>
       <div class="alert alert-info"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-info"><%= flash[:alert] %></div>
     <% end %>
     <%= yield %>
   </body>
