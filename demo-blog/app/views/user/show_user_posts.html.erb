@@ -35,6 +35,9 @@
       <div class="col-md-6 border border-secondary">
         <% post.comments.includes(:user).each do |comment| %>
           <p><strong><%= comment.user.name %>:</strong> <span><%= comment.text %></span></p>
+        <% if can?(:delete, comment) %>
+          <%= button_to "Delete Comment", delete_comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% end %>
         <% end %>
       </div>
     </div>

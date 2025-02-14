@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   delete "/post/delete/:id", to: "posts#delete", as: "delete_post"
 
   post "/comment/create", to: "comments#create", as: "new_comment"
+  delete "/comment/delete/:id", to: "comments#delete", as: "delete_comment"
 
   post "/likes/create", to: "likes#create", as: "new_like"
   # Defines the root path route ("/")
