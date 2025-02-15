@@ -32,6 +32,12 @@ Rails.application.routes.draw do
   delete "/comment/delete/:id", to: "comments#delete", as: "delete_comment"
 
   post "/likes/create", to: "likes#create", as: "new_like"
+
+
+  namespace :api do
+    resources :posts, only: [ :index ]
+  end
+
   # Defines the root path route ("/")
   root "post#index"
 end

@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  protect_from_forgery with: :null_session
   before_action :authenticate_user!
   load_and_authorize_resource # Ensures CanCanCan enforces permissions
 
