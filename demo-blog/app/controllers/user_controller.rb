@@ -26,7 +26,7 @@ class UserController < ApplicationController
       @posts = @user.posts.order(:created_at).page(params[:page]).per(3)
       respond_to do |format|
         format.html # Renders the HTML view by default
-        format.json { render json: @user }
+        format.json { render json: @user.posts }
       end
     rescue ActiveRecord::RecordNotFound
       render json: { error: "User not found" }, status: :not_found

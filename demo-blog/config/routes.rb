@@ -33,11 +33,6 @@ Rails.application.routes.draw do
 
   post "/likes/create", to: "likes#create", as: "new_like"
 
-
-  namespace :api do
-    resources :posts, only: [ :index ]
-  end
-
   # Defines the root path route ("/")
   root "post#index"
 end
