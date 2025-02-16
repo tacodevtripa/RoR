@@ -45,6 +45,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def show_comments
+    begin
+      @comments = Post.find(params[:id]).comments
+      respond_to do |format|
+        format.html { render json: @comments }
+        format.json { render json: @comments }
+      end
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+
   private
 
   def post_params

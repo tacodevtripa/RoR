@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post "/post/create", to: "posts#create"
   put "/post/update/:id", to: "posts#update"
   delete "/post/delete/:id", to: "posts#delete", as: "delete_post"
+  get "/post/show_comments/:id", to: "posts#show_comments"
 
   post "/comment/create", to: "comments#create", as: "new_comment"
   delete "/comment/delete/:id", to: "comments#delete", as: "delete_comment"

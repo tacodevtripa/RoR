@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     return unless user # If the user is not logged in, they have no abilities
 
-    can [ :read, :create ], Post # All users can read and create posts
+    can [ :read, :create, :show_comments ], Post # All users can read and create posts
     can [ :read, :create ], Comment # All users can read and create comments
 
     if user.role == "admin"
