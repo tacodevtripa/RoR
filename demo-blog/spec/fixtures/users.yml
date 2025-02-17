@@ -2,7 +2,11 @@ one:
   name: "Fixture User"
   photo: "Test Photo"
   bio: "Test Bio"
+  email: "fixtureuser1@demo.com"
+  encrypted_password: "<%= Devise::Encryptor.digest(User, 'password123') %>"
 
 two:
   name: "Fixture User 2"
   bio: "Test Bio 2"
+  email: "fixtureuser2@demo.com"
+  encrypted_password: "<%= Devise::Encryptor.digest(User, 'password123') %>"
