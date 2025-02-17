@@ -29,6 +29,16 @@ Rails.application.routes.draw do
   delete "/post/delete/:id", to: "posts#delete", as: "delete_post"
   get "/post/show_comments/:id", to: "posts#show_comments"
 
+  namespace :api do
+    namespace :v1 do
+      resources :posts do
+        member do
+          get :show_comments
+        end
+      end
+    end
+  end
+
   post "/comment/create", to: "comments#create", as: "new_comment"
   delete "/comment/delete/:id", to: "comments#delete", as: "delete_comment"
 

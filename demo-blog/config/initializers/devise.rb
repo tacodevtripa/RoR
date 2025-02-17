@@ -79,7 +79,7 @@ Devise.setup do |config|
   # enable this with :database unless you are using a custom strategy.
   # The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+  # config.http_authenticatable = [ :database ]
 
   # If 401 status code should be returned for AJAX requests. True by default.
   # config.http_authenticatable_on_xhr = true
@@ -312,12 +312,13 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.jwt do |jwt|
-    jwt.secret = Rails.application.credentials.jwt_secret_key || ENV["JWT_SECRET_KEY"]
+    jwt.secret = Rails.application.credentials.jwt_secret_key!
     jwt.dispatch_requests = [
       [ "POST", %r{^/user/sign_in$} ],
-      [ "POST", %r{^/user$} ] # Register new users
+      [ "POST", %r{^/user$} ]
     ]
-    jwt.revocation_requests = [ [ "DELETE", %r{^/user/sign_out$} ] ]
-    jwt.expiration_time = 1.day.to_i # Set token expiration time (1 day)
+    # Disable revocation as you're using Devise::JWT::RevocationStrategies::Null
+    # jwt.revocation_requests = [["DELETE", %r{^/user/sign_out$}]]
+    # jwt.expiration_time = 1.day.to_i  # Optional: Set token expiration time (1 day)
   end
 end
