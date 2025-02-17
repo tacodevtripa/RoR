@@ -36,6 +36,11 @@ Rails.application.routes.draw do
           get :show_comments
         end
       end
+      resources :user do
+        member do
+          get :show_posts
+        end
+      end
     end
   end
 

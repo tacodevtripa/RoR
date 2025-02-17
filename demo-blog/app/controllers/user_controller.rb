@@ -2,19 +2,11 @@ class UserController < ApplicationController
   protect_from_forgery with: :null_session
   def index
     @users = User.all
-    respond_to do |format|
-      format.html # Renders the HTML view by default
-      format.json { render json: @users }
-    end
   end
 
   def show_user
     begin
       @user = User.find(params[:id])
-      respond_to do |format|
-        format.html # Renders the HTML view by default
-        format.json { render json: @user }
-      end
     rescue ActiveRecord::RecordNotFound
       render json: { error: "User not found" }, status: :not_found
     end
@@ -24,10 +16,6 @@ class UserController < ApplicationController
     begin
       @user = User.find(params[:id])
       @posts = @user.posts.order(:created_at).page(params[:page]).per(3)
-      respond_to do |format|
-        format.html # Renders the HTML view by default
-        format.json { render json: @user.posts }
-      end
     rescue ActiveRecord::RecordNotFound
       render json: { error: "User not found" }, status: :not_found
     end
@@ -37,10 +25,6 @@ class UserController < ApplicationController
     begin
       @user = User.find(params[:id])
       @post = Post.find(params[:post_id])
-      respond_to do |format|
-        format.html # Renders the HTML view by default
-        format.json { render json: @post }
-      end
     rescue ActiveRecord::RecordNotFound
       render json: { error: "User not found" }, status: :not_found
     end
