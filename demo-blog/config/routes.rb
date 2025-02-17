@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resources :posts do
         member do
           get :show_comments
+          post :create_comment_from_api
         end
       end
       resources :user do
