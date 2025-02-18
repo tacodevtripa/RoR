@@ -14,7 +14,7 @@ describe 'Blog API' do
       parameter name: :id, in: :path, type: :string
       parameter name: :Authorization, in: :header, type: :string, description: "JWT Token", required: true
 
-      response '200', 'blog found' do
+      response '200', 'show all posts for a user' do
         schema type: :array,
         items: {
           type: :object,
@@ -29,7 +29,7 @@ describe 'Blog API' do
         run_test!
       end
 
-      response '404', 'user id not found request' do
+      response '404', 'user id not found' do
         let(:id) { 9999999 }
         run_test!
       end
@@ -43,7 +43,7 @@ describe 'Blog API' do
       parameter name: :id, in: :path, type: :string
       parameter name: :Authorization, in: :header, type: :string, description: "JWT Token", required: true
 
-      response '200', '' do
+      response '200', 'all comments for a post' do
         schema type: :array,
         items: {
           type: :object,
@@ -87,7 +87,7 @@ describe 'Blog API' do
         run_test!
       end
 
-      response '404', 'post not found created' do
+      response '404', 'post not found' do
         let(:id) { 999999 }
         let(:comment) { { text: 'comment from test file' } }
         run_test!
