@@ -52,7 +52,7 @@ For more information on the importance of a professional README for your reposit
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 [RoR Demo Blog] <a name="about-project"></a>
 
 > RoR Demo Blog that support Users Authenthication with Devise, Authorization with CanCanCan and data persistance with a PostgreSQL local database.
 
@@ -65,8 +65,6 @@ For more information on the importance of a professional README for your reposit
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
-
-> Describe between 1-3 key features of the application.
 
 - **Basic User Interaction with Posts such as CRUD Operations, Liking and Commenting**
 - **Authentication and Authorization with Devise and CanCanCan**
@@ -81,8 +79,6 @@ For more information on the importance of a professional README for your reposit
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
-
-> Describe how a new developer could make use of your project.
 
 To get a local copy up and running, follow these steps.
 
