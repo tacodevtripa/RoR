@@ -39,13 +39,4 @@ class User::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   #
-  # private
-
-  # def respond_with(resource, _opts = {})
-  #   render json: { message: "Logged in successfully.", user: resource }, status: :ok
-  # end
-
-  # def respond_to_on_destroy
-  #   head :no_content
-  # end
 end

@@ -7,8 +7,7 @@ RSpec.describe "Create Post", type: :system do
 
   before do
     driven_by(:rack_test)
-    visit root_path
-    click_link 'Sign In'
+    sign_in users(:one)
     visit new_post_path
   end
 
@@ -39,6 +38,6 @@ RSpec.describe "Create Post", type: :system do
   it "logs out when clicking the log out button" do
     click_button "Log Out"
 
-    expect(page).to have_content("Logged out successfully!")
+    expect(page).to have_content("Signed out successfully.")
   end
 end
