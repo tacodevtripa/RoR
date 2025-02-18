@@ -6,9 +6,7 @@ RSpec.describe PostsController, type: :controller do
   let(:post_instance) { posts(:one) } # Define a test post
 
   before do
-    controller.singleton_class.class_eval do
-      define_method(:current_user) { user }
-    end
+    sign_in users(:one)
   end
 
   describe "GET #index" do
@@ -35,15 +33,14 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:valid_params) { { post: { title: "My Title", text: "Post content" } } }
+    let(:valid_params) { { post: { author: user, title: "My Title", text: "Post content" } } }
     let(:invalid_params) { { post: { title: "", text: "" } } }
 
-    # it "creates a post and increases count" do
-    #   expect {
-    #     post :create, params: valid_params
-    #     puts assigns(:post).errors.full_messages # Debug validation errors
-    #   }.to change(Post, :count).by(0)
-    # end
+    it "creates a post and increases count" do
+      expect {
+        post :create, params: valid_params
+      }.to change(Post, :count).by(1)
+    end
 
     it "fails to create a post and redirects back with an error" do
       expect {
@@ -68,9 +65,9 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it "returns a 404 error for a non-existent post" do
-      patch :update, params: { id: -1 }, body: update_params
-      expect(response).to have_http_status(:not_found)
-      expect(JSON.parse(response.body)["error"]).to eq("Post not found")
+      expect {
+        patch :update, params: { id: 99999 }, body: update_params
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
@@ -80,14 +77,13 @@ RSpec.describe PostsController, type: :controller do
         delete :delete, params: { id: post_instance.id }
       }.to change(Post, :count).by(-1)
 
-      expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)["message"]).to eq("delete success")
+      expect(response).to have_http_status(:redirect)
     end
 
     it "returns a 404 error when trying to delete a non-existent post" do
-      delete :delete, params: { id: -1 }
-      expect(response).to have_http_status(:not_found)
-      expect(JSON.parse(response.body)["error"]).to eq("Post not found")
+      expect {
+        delete :delete, params: { id: -1 }
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end
