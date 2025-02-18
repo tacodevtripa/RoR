@@ -5,6 +5,7 @@ RSpec.describe 'Posts Index Page', type: :system do
 
   before do
     driven_by(:rack_test)
+    sign_in users(:one)
     visit post_index_path
   end
 
