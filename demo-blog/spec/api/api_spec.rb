@@ -5,7 +5,7 @@ describe 'Blog API' do
   fixtures :users, :posts, :comments # Load users and posts from fixtures
 
   let(:user) { users(:one) }
-  let(:post) { posts(:one) }
+  let(:article) { posts(:one) }
   let(:Authorization) { "Bearer #{generate_jwt_token(user)}" }
   path '/api/v1/user/{id}/show_posts' do
     get 'Get all posts for a user' do
@@ -14,7 +14,7 @@ describe 'Blog API' do
       parameter name: :id, in: :path, type: :string
       parameter name: :Authorization, in: :header, type: :string, description: "JWT Token", required: true
 
-       response '200', 'blog found' do
+      response '200', 'blog found' do
         schema type: :array,
         items: {
           type: :object,
@@ -25,46 +25,73 @@ describe 'Blog API' do
           },
           required: [ 'id', 'author_id', 'text' ]
         }
-        let(:id) { post.id }
+        let(:id) { user.id }
         run_test!
       end
 
-      # response '422', 'invalid request' do
-      #   let(:blog) { { title: 'foo' } }
-      #   run_test!
-      # end
+      response '404', 'user id not found request' do
+        let(:id) { 9999999 }
+        run_test!
+      end
     end
   end
 
-  # path '/blogs/{id}' do
-  #   get 'Retrieves a blog' do
-  #     tags 'Blogs', 'Another Tag'
-  #     produces 'application/json', 'application/xml'
-  #     parameter name: :id, in: :path, type: :string
-  #     request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
+  path '/api/v1/posts/{id}/show_comments' do
+    get 'Get all comments for a post' do
+      tags 'Comments'
+      consumes 'application/json'
+      parameter name: :id, in: :path, type: :string
+      parameter name: :Authorization, in: :header, type: :string, description: "JWT Token", required: true
 
-  #     response '200', 'blog found' do
-  #       schema type: :object,
-  #         properties: {
-  #           id: { type: :integer },
-  #           title: { type: :string },
-  #           content: { type: :string }
-  #         },
-  #         required: [ 'id', 'title', 'content' ]
+      response '200', '' do
+        schema type: :array,
+        items: {
+          type: :object,
+          properties: {
+            id: { type: :integer },
+            user_id: { type: :integer },
+            post_id: { type: :integer },
+            text: { type: :string }
+          },
+          required: [ 'id', 'user_id', 'post_id', 'text' ]
+        }
+        let(:id) { article.id }
+        run_test!
+      end
 
-  #       let(:id) { Blog.create(title: 'foo', content: 'bar').id }
-  #       run_test!
-  #     end
+      response '404', 'post id not found request' do
+        let(:id) { 9999999 }
+        run_test!
+      end
+    end
+  end
 
-  #     response '404', 'blog not found' do
-  #       let(:id) { 'invalid' }
-  #       run_test!
-  #     end
+  path '/api/v1/posts/{id}/create_comment_from_api' do
+    post 'Create a comment for a post' do
+      tags 'Comments'
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :id, in: :path, type: :string
+      parameter name: :Authorization, in: :header, type: :string, description: "JWT Token", required: true
+      parameter name: :comment, in: :body, schema: {
+        type: :object,
+        properties: {
+          text: { type: :string }
+        },
+        required: [ "text" ]
+      }
 
-  #     response '406', 'unsupported accept header' do
-  #       let(:'Accept') { 'application/foo' }
-  #       run_test!
-  #     end
-  #   end
-  # end
+      response '201', 'comment created' do
+        let(:id) { article.id }
+        let(:comment) { { text: 'comment from test file' } }
+        run_test!
+      end
+
+      response '404', 'post not found created' do
+        let(:id) { 999999 }
+        let(:comment) { { text: 'comment from test file' } }
+        run_test!
+      end
+    end
+  end
 end
