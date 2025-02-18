@@ -9,14 +9,14 @@ RSpec.describe PostsController, type: :controller do
     sign_in users(:one)
   end
 
-  describe "GET #index" do
-    it "returns a successful response for HTML" do
+  describe 'GET #index' do
+    it 'returns a successful response for HTML' do
       get :index
       expect(response).to have_http_status(:success)
       expect(assigns(:posts)).to eq(Post.all)
     end
 
-    it "returns JSON response with all posts" do
+    it 'returns JSON response with all posts' do
       get :index, format: :json
       parsed_response = JSON.parse(response.body)
       expect(response).to have_http_status(:success)
@@ -24,68 +24,68 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "renders the new template" do
+  describe 'GET #new' do
+    it 'renders the new template' do
       get :new
       expect(response).to have_http_status(:success)
       expect(assigns(:post)).to be_a_new(Post)
     end
   end
 
-  describe "POST #create" do
-    let(:valid_params) { { post: { author: user, title: "My Title", text: "Post content" } } }
-    let(:invalid_params) { { post: { title: "", text: "" } } }
+  describe 'POST #create' do
+    let(:valid_params) { { post: { author: user, title: 'My Title', text: 'Post content' } } }
+    let(:invalid_params) { { post: { title: '', text: '' } } }
 
-    it "creates a post and increases count" do
-      expect {
+    it 'creates a post and increases count' do
+      expect do
         post :create, params: valid_params
-      }.to change(Post, :count).by(1)
+      end.to change(Post, :count).by(1)
     end
 
-    it "fails to create a post and redirects back with an error" do
-      expect {
+    it 'fails to create a post and redirects back with an error' do
+      expect do
         post :create, params: invalid_params
-      }.not_to change(Post, :count)
+      end.not_to change(Post, :count)
 
       expect(response).to redirect_to(new_post_path)
-      expect(flash[:notice]).to eq("Error creating post")
+      expect(flash[:notice]).to eq('Error creating post')
     end
   end
 
-  describe "PATCH #update" do
-    let(:update_params) { { title: "Updated Title", text: "Updated content" }.to_json }
+  describe 'PATCH #update' do
+    let(:update_params) { { title: 'Updated Title', text: 'Updated content' }.to_json }
 
-    it "updates an existing post and returns JSON" do
-      request.headers["CONTENT_TYPE"] = "application/json"
+    it 'updates an existing post and returns JSON' do
+      request.headers['CONTENT_TYPE'] = 'application/json'
       patch :update, params: { id: post_instance.id }, body: update_params
 
       post_instance.reload
       expect(response).to have_http_status(:success)
-      expect(post_instance.title).to eq("Updated Title")
+      expect(post_instance.title).to eq('Updated Title')
     end
 
-    it "returns a 404 error for a non-existent post" do
-      expect {
-        put :update, params: { id: 99999 }, body: update_params
+    it 'returns a 404 error for a non-existent post' do
+      expect do
+        put :update, params: { id: 99_999 }, body: update_params
         expect(response).to redirect_to(root_path)
-        expect(flash[:notice]).to eq("Error updating post.")
-      }.to raise_error(ActiveRecord::RecordNotFound)
+        expect(flash[:notice]).to eq('Error updating post.')
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
-  describe "DELETE #delete" do
-    it "deletes an existing post and returns success message" do
-      expect {
+  describe 'DELETE #delete' do
+    it 'deletes an existing post and returns success message' do
+      expect do
         delete :delete, params: { id: post_instance.id }
-      }.to change(Post, :count).by(-1)
+      end.to change(Post, :count).by(-1)
 
       expect(response).to have_http_status(:redirect)
     end
 
-    it "returns a 404 error when trying to delete a non-existent post" do
-      expect {
+    it 'returns a 404 error when trying to delete a non-existent post' do
+      expect do
         delete :delete, params: { id: -1 }
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

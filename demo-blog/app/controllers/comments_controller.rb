@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
 
     if @comment.save
       @post.increment_comments_counter
-      redirect_to show_user_specific_post_path(@post.author, @post), notice: "Comment was successfully created."
+      redirect_to show_user_specific_post_path(@post.author, @post), notice: 'Comment was successfully created.'
     else
-      redirect_to show_user_specific_post_path(@post.author, @post), alert: "Error creating comment."
+      redirect_to show_user_specific_post_path(@post.author, @post), alert: 'Error creating comment.'
     end
   end
 
@@ -19,9 +19,9 @@ class CommentsController < ApplicationController
 
     if @comment.delete
       @comment.post.decrement!(:comments_counter)
-      redirect_to show_user_specific_post_path(@comment.post.author, @comment.post), notice: "Comment deleted."
+      redirect_to show_user_specific_post_path(@comment.post.author, @comment.post), notice: 'Comment deleted.'
     else
-      redirect_to show_user_specific_post_path(@comment.post.author, @comment.post), alert: "Could not delete comment."
+      redirect_to show_user_specific_post_path(@comment.post.author, @comment.post), alert: 'Could not delete comment.'
     end
   end
 

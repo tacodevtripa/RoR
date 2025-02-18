@@ -35,3 +35,4 @@
 
 # Ignore test coverage files generated
 /coverage
+node_modules/

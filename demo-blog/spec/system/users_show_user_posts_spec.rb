@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User Show Posts Page", type: :system do
+RSpec.describe 'User Show Posts Page', type: :system do
   fixtures :users, :posts, :comments # Load users and posts from fixtures
 
   let(:user) { users(:one) }
@@ -18,19 +18,19 @@ RSpec.describe "User Show Posts Page", type: :system do
     expect(page).to have_content(user.name)
   end
 
-  it "displays the number of posts the user has written" do
+  it 'displays the number of posts the user has written' do
     expect(page).to have_content("Number of Posts: #{user.posts_counter}")
   end
 
-  it "displays the title of a post" do
+  it 'displays the title of a post' do
     expect(page).to have_content(posts(:one).title)
   end
 
-  it "displays the body of a post" do
+  it 'displays the body of a post' do
     expect(page).to have_content(posts(:one).text)
   end
 
-  it "displays the last 5 comments of a post" do
+  it 'displays the last 5 comments of a post' do
     expect(page).to have_content(comments(:one).text)
     expect(page).to have_content(comments(:two).text)
     expect(page).to have_content(comments(:three).text)
@@ -38,15 +38,15 @@ RSpec.describe "User Show Posts Page", type: :system do
     expect(page).to have_content(comments(:five).text)
   end
 
-  it "displays the number of comments a post has" do
+  it 'displays the number of comments a post has' do
     expect(page).to have_content("Comments: #{posts(:one).comments_counter}")
   end
 
-  it "displays the number of likes a post has" do
+  it 'displays the number of likes a post has' do
     expect(page).to have_content("Likes: #{posts(:one).likes_counter}")
   end
 
-  it "displays the pagination element if user has more than 3 posts" do
+  it 'displays the pagination element if user has more than 3 posts' do
     expect(page).to have_css("ul[class='pagination']")
   end
 

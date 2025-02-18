@@ -1,15 +1,13 @@
-# frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
   def initialize(user)
     return unless user # If the user is not logged in, they have no abilities
 
-    can [ :read, :create, :show_comments, :create_comment_from_api ], Post # All users can read and create posts
-    can [ :read, :create ], Comment # All users can read and create comments
+    can %i[read create show_comments create_comment_from_api], Post # All users can read and create posts
+    can %i[read create], Comment # All users can read and create comments
 
-    if user.role == "admin"
+    if user.role == 'admin'
       can :manage, Post # Admins can manage (create, read, update, delete) any post
       can :manage, Comment # Admins can manage (create, read, update, delete) any comment
     else

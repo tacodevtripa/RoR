@@ -38,6 +38,6 @@ RSpec.describe 'Users Index Page', type: :system do
     expect(page).to have_current_path(show_user_path(user))
 
     expect(page).to have_content(user.name)
-    expect(page).to have_content("Test Bio")
+    expect(page).to have_content('Test Bio')
   end
 end

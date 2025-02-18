@@ -10,17 +10,20 @@ RSpec.describe Post, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:title).with_message('Title cannot be blank') }
-    it { should validate_length_of(:title).is_at_most(250).with_message('Title exceeds the maximum length of 250 characters') }
+    it {
+      should validate_length_of(:title).is_at_most(250).with_message('Title exceeds the maximum length of 250 characters')
+    }
     it { should validate_numericality_of(:comments_counter).only_integer.is_greater_than_or_equal_to(0) }
     it { should validate_numericality_of(:likes_counter).only_integer.is_greater_than_or_equal_to(0) }
   end
 
-    describe '#recent_comments' do
+  describe '#recent_comments' do
     let(:post) { posts(:one) }
 
     it 'returns the most recent comments first' do
       recent_comments = post.recent_comments
-      expect(recent_comments.map(&:text)).to eq([ "text comment 1", "text comment 2", "text comment 3", "text comment 4", "text comment 5" ])
+      expect(recent_comments.map(&:text)).to eq(['text comment 1', 'text comment 2', 'text comment 3',
+                                                 'text comment 4', 'text comment 5'])
     end
 
     it 'returns a limited number of recent comments' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User Show Page", type: :system do
+RSpec.describe 'User Show Page', type: :system do
   fixtures :users, :posts # Load users and posts from fixtures
 
   let(:user) { users(:one) }
@@ -18,7 +18,7 @@ RSpec.describe "User Show Page", type: :system do
     expect(page).to have_content(user.name)
   end
 
-  it "displays the number of posts the user has written" do
+  it 'displays the number of posts the user has written' do
     expect(page).to have_content("Number of Posts: #{user.posts_counter}")
   end
 

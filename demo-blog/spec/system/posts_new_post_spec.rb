@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Create Post", type: :system do
+RSpec.describe 'Create Post', type: :system do
   fixtures :users # Load users from fixtures
 
   let(:user) { users(:one) } # Assume you have a user fixture
@@ -12,32 +12,32 @@ RSpec.describe "Create Post", type: :system do
   end
 
 
-  it "displays the post creation form" do
-    expect(page).to have_content("Create Post")
-    expect(page).to have_field("Post Title")
-    expect(page).to have_field("Your Post Text")
-    expect(page).to have_button("Create Post")
+  it 'displays the post creation form' do
+    expect(page).to have_content('Create Post')
+    expect(page).to have_field('Post Title')
+    expect(page).to have_field('Your Post Text')
+    expect(page).to have_button('Create Post')
   end
 
-  it "creates a post when the form is submitted with valid data" do
-    fill_in "Post Title", with: "Test Post"
-    fill_in "Your Post Text", with: "This is the content of my first test post."
+  it 'creates a post when the form is submitted with valid data' do
+    fill_in 'Post Title', with: 'Test Post'
+    fill_in 'Your Post Text', with: 'This is the content of my first test post.'
 
-    click_button "Create Post"
+    click_button 'Create Post'
 
-    expect(page).to have_content("Post was successfully created") # Adjust based on your flash message
-    expect(page).to have_content("Test Post")
+    expect(page).to have_content('Post was successfully created') # Adjust based on your flash message
+    expect(page).to have_content('Test Post')
   end
 
-  it "shows an error when submitting an empty form" do
-    click_button "Create Post"
+  it 'shows an error when submitting an empty form' do
+    click_button 'Create Post'
 
-    expect(page).to have_content("Error creating post")
+    expect(page).to have_content('Error creating post')
   end
 
-  it "logs out when clicking the log out button" do
-    click_button "Log Out"
+  it 'logs out when clicking the log out button' do
+    click_button 'Log Out'
 
-    expect(page).to have_content("Signed out successfully.")
+    expect(page).to have_content('Signed out successfully.')
   end
 end
