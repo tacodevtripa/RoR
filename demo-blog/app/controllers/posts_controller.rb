@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       @post = Post.update(params[:id], post_params)
       render json: @post
     rescue ActiveRecord::RecordNotFound
-      render json: { error: "Post not found" }, status: :not_found
+      redirect_to root_path, notice: "Error updating post."
     end
   end
 
@@ -42,18 +42,6 @@ class PostsController < ApplicationController
       redirect_to show_user_specific_post_path(current_user.id, @post.id), notice: "Post was successfully created."
     else
       redirect_to new_post_path, notice: "Error creating post"
-    end
-  end
-
-  def show_comments
-    begin
-      @comments = Post.find(params[:id]).comments
-      respond_to do |format|
-        format.html { render json: @comments }
-        format.json { render json: @comments }
-      end
-    rescue ActiveRecord::RecordNotFound
-      render json: { error: "User not found" }, status: :not_found
     end
   end
 

@@ -66,7 +66,9 @@ RSpec.describe PostsController, type: :controller do
 
     it "returns a 404 error for a non-existent post" do
       expect {
-        patch :update, params: { id: 99999 }, body: update_params
+        put :update, params: { id: 99999 }, body: update_params
+        expect(response).to redirect_to(root_path)
+        expect(flash[:notice]).to eq("Error updating post.")
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
