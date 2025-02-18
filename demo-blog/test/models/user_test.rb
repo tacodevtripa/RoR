@@ -67,6 +67,6 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     Post.create!(author: @user, title: 'Test Post 1', text: 'demo text', comments_counter: 0, likes_counter: 0)
     Post.create!(author: @user, title: 'Test Post 2', text: 'demo text', comments_counter: 0, likes_counter: 0)
-    assert_equal 2, @user.get_posts_counter
+    assert_equal 2, @user.see_posts_counter
   end
 end

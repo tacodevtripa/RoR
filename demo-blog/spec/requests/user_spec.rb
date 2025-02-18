@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
       user = users(:one)
       posts = posts(:one, :two, :three, :four, :five) # Adjust to your fixture data
       user.posts = posts
-      expect(user.get_posts_counter).to eq(5)
+      expect(user.see_posts_counter).to eq(5)
     end
   end
 end

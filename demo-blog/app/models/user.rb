@@ -23,7 +23,7 @@ class User < ApplicationRecord
     increment!(:posts_counter)
   end
 
-  def get_posts_counter
+  def see_posts_counter
     posts.count
   end
 end
