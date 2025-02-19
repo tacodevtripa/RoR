@@ -39,7 +39,6 @@ For more information on the importance of a professional README for your reposit
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Video Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
@@ -69,12 +68,6 @@ For more information on the importance of a professional README for your reposit
 - **Basic User Interaction with Posts such as CRUD Operations, Liking and Commenting**
 - **Authentication and Authorization with Devise and CanCanCan**
 - **Both an UI using the Rails Server and an API Mode to interact with Postman**
-
-<!-- LIVE DEMO -->
-
-## 🚀 Video Demo <a name="live-demo"></a>
-
-- [Video Demo Link](https://google.com)
 
 <!-- GETTING STARTED -->
 
@@ -112,7 +105,27 @@ Install this project with:
   bundle install
 ```
 
--
+### Set up PostgreSQL DB
+
+Development Environment
+
+```sh
+  rails db:create
+```
+
+```sh
+  rails db:migrate
+```
+
+Test Environment
+
+```sh
+  ruby -e "ENV['RAILS_ENV'] = 'test'; load 'bin/rails'" db:create
+```
+
+```sh
+  ruby -e "ENV['RAILS_ENV'] = 'test'; load 'bin/rails'" db:migrate
+```
 
 ### Usage
 
