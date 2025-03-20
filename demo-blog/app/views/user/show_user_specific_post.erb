@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="container mx-auto">
+    <div class="row mt-1 justify-content-center">
+      <div class="col-md-6 border border-secondary">
+        <h6 class="text-start">Post Number: <%= @post.id %> by <i><%= @user.name %></i></h6>
+        <h6 class="text-center"><%= @post.title %></h6>
+        <p class="text-center"> <%= @post.text %> </p>
+        <p class="text-end"> <span>Comments: <%= @post.comments_counter %></span> <span>Likes: <%= @post.likes_counter %></span> </p>
+        <% if user_signed_in? %>
+          <%= form_for(:like, url: new_like_path, method: :post) do |form| %>
+            <%= form.hidden_field :post_id, value: @post.id %>
+            <button type="submit" class="btn btn-primary rounded mb-1">Like</button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <div class="row px-5 mb-5 justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-1 border-secondary">
+        <div class="card-body">
+          <!-- Comments List -->
+          <div class="mb-5">
+            <% @post.comments.includes(:user).each do |comment| %>
+              <div class="bg-light p-3 rounded mb-2">
+                <p><strong><%= comment.user.name %>:</strong> <%= comment.text %></p>
+                <% if can?(:delete, comment) %>
+                  <%= button_to "Delete Comment", delete_comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Add Comment Form -->
+          <div class="ml-auto">
+            <% if user_signed_in? %>
+              <%= form_for(:comment, url: new_comment_path, method: :post) do |form| %>
+                <%= form.hidden_field :post_id, value: @post.id %>
+                <div class="mb-3">
+                  <%= form.text_area :text, class: "form-control", rows: 5, placeholder: "Write your comment..." %>
+                </div>
+                <button type="submit" class="btn btn-primary rounded">Post Comment</button>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

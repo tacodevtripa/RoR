@@ -1,0 +1,87 @@
+---
+openapi: 3.0.1
+info:
+  title: BLOG API
+  version: v1
+paths:
+  "/api/v1/user/{id}/show_posts":
+    get:
+      summary: Get all posts for a user
+      tags:
+        - Posts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: JWT Token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: show all posts for a user
+        "404":
+          description: user id not found
+  "/api/v1/posts/{id}/show_comments":
+    get:
+      summary: Get all comments for a post
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: JWT Token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: all comments for a post
+        "404":
+          description: post id not found request
+  "/api/v1/posts/{id}/create_comment_from_api":
+    post:
+      summary: Create a comment for a post
+      tags:
+        - Comments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: JWT Token
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: comment created
+        "404":
+          description: post not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+              required:
+                - text
+servers:
+  - url: http://127.0.0.1:3000/
+    variables:
+      defaultHost:
+        default: http://127.0.0.1:3000/

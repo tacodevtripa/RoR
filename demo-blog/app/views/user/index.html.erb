@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">All Users</h1>
+
+  <table class="table table-striped table-bordered">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="row justify-content-between align-items-center">
+          <!-- Photo column -->
+          <td class="col-md-2 text-center">
+            <% if user.photo.present? %>
+              <%= image_tag('profile-pic.png', alt: "#{user.name} profile picture", class: "img-thumbnail", width: 150, height: 150) %>
+            <% else %>
+              <span class="text-muted">No photo</span>
+            <% end %>
+          </td>
+
+          <!-- User name and posts counter column -->
+          <td class="col-md-10 align-items-center">
+            <div class="col-auto fs-1 mr-auto">
+              <%= link_to user.name, show_user_path(user), class: 'btn btn-outline-secondary' %>
+            </div>
+            <div class="col-auto text-end">
+              <small class="w-50">Number of Posts: <%= user.posts_counter %></small>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

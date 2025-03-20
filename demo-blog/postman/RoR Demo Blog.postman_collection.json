@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "f5795c83-4fc1-450b-91d5-6837a9b9cf00",
+		"name": "RoR Demo Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40048277"
+	},
+	"item": [
+		{
+			"name": "Show Post Comments",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: \"http://127.0.0.1:3000/user/sign_in\",\r",
+							"    method: \"POST\",\r",
+							"    header: {\r",
+							"        \"Content-Type\": \"application/json\",\r",
+							"        \"Accept\": \"application/json\"\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            user: {\r",
+							"                email: \"seventuser@demo.com\",\r",
+							"                password: \"123456\"\r",
+							"            }\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Login failed:\", err);\r",
+							"    } else {\r",
+							"        var jsonData = res.json();\r",
+							"        var token = jsonData.token;  // Get JWT token from response body\r",
+							"        if (token) {\r",
+							"            pm.environment.set(\"auth_token\", \"Bearer \" + token);\r",
+							"            console.log(\"Token stored:\", token);\r",
+							"        } else {\r",
+							"            console.log(\"No token received!\");\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/v1/posts/5/show_comments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"5",
+						"show_comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show User Posts",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: \"http://127.0.0.1:3000/user/sign_in\",\r",
+							"    method: \"POST\",\r",
+							"    header: {\r",
+							"        \"Content-Type\": \"application/json\",\r",
+							"        \"Accept\": \"application/json\"\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            user: {\r",
+							"                email: \"seventuser@demo.com\",\r",
+							"                password: \"123456\"\r",
+							"            }\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Login failed:\", err);\r",
+							"    } else {\r",
+							"        var jsonData = res.json();\r",
+							"        var token = jsonData.token;  // Get JWT token from response body\r",
+							"        if (token) {\r",
+							"            pm.environment.set(\"auth_token\", \"Bearer \" + token);\r",
+							"            console.log(\"Token stored:\", token);\r",
+							"        } else {\r",
+							"            console.log(\"No token received!\");\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/v1/posts/5/show_comments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"5",
+						"show_comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: \"http://127.0.0.1:3000/user/sign_in\",\r",
+							"    method: \"POST\",\r",
+							"    header: {\r",
+							"        \"Content-Type\": \"application/json\",\r",
+							"        \"Accept\": \"application/json\"\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            user: {\r",
+							"                email: \"seventuser@demo.com\",\r",
+							"                password: \"123456\"\r",
+							"            }\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Login failed:\", err);\r",
+							"    } else {\r",
+							"        var jsonData = res.json();\r",
+							"        var token = jsonData.token;  // Get JWT token from response body\r",
+							"        if (token) {\r",
+							"            pm.environment.set(\"auth_token\", \"Bearer \" + token);\r",
+							"            console.log(\"Token stored:\", token);\r",
+							"        } else {\r",
+							"            console.log(\"No token received!\");\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": " application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/v1/posts/5/create_comment_from_api",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"5",
+						"create_comment_from_api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.sendRequest({\r",
+					"    url: \"http://127.0.0.1:3000/user/sign_in\",\r",
+					"    method: \"POST\",\r",
+					"    header: {\r",
+					"        \"Content-Type\": \"application/json\",\r",
+					"        \"Accept\": \"application/json\"\r",
+					"    },\r",
+					"    body: {\r",
+					"        mode: \"raw\",\r",
+					"        raw: JSON.stringify({\r",
+					"            user: {\r",
+					"                email: \"seventuser@demo.com\",\r",
+					"                password: \"123456\"\r",
+					"            }\r",
+					"        })\r",
+					"    }\r",
+					"}, function (err, res) {\r",
+					"    if (err) {\r",
+					"        console.log(\"Login failed:\", err);\r",
+					"    } else {\r",
+					"        var jsonData = res.json();\r",
+					"        var token = jsonData.token;  // Get JWT token from response body\r",
+					"        if (token) {\r",
+					"            pm.environment.set(\"auth_token\", \"Bearer \" + token);\r",
+					"            console.log(\"Token stored:\", token);\r",
+					"        } else {\r",
+					"            console.log(\"No token received!\");\r",
+					"        }\r",
+					"    }\r",
+					"});\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
